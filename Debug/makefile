@@ -40,11 +40,15 @@ endif
 # All Target
 all: 327_proj3_test
 
+dependents:
+	-cd /home/thinh/Downloads/C++/327_proj3_fileIO/Debug && $(MAKE) all
+	-cd /home/thinh/Downloads/C++/327_proj3_stringparser/Debug && $(MAKE) all
+
 # Tool invocations
-327_proj3_test: $(OBJS) $(USER_OBJS)
+327_proj3_test: $(OBJS) $(USER_OBJS) /home/thinh/Downloads/C++/327_proj3_fileIO/Debug/lib327_proj3_fileIO.a /home/thinh/Downloads/C++/327_proj3_stringparser/Debug/lib327_proj3_stringparser.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L../../327_proj3_fileIO/Debug -o "327_proj3_test" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/thinh/Downloads/C++/327_proj3_stringparser/Debug" -L"/home/thinh/Downloads/C++/327_proj3_fileIO/Debug" -L../../327_proj3_fileIO/Debug -o "327_proj3_test" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -54,5 +58,7 @@ clean:
 	-@echo ' '
 
 .PHONY: all clean dependents
+/home/thinh/Downloads/C++/327_proj3_fileIO/Debug/lib327_proj3_fileIO.a:
+/home/thinh/Downloads/C++/327_proj3_stringparser/Debug/lib327_proj3_stringparser.a:
 
 -include ../makefile.targets
